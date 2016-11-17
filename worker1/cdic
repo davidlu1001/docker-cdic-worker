@@ -1,0 +1,47 @@
+#!/bin/bash
+#
+# cdic: Startup script for CDIC Worker Server Application.
+#
+# chkconfig: 35 80 05
+# description: Startup script for CDIC Worker Server Application.
+
+SCRIPT_HOME=.;
+export SCRIPT_HOME
+
+instanceName=$2
+
+start() {
+        echo -n "Starting CDIC Worker Server: "
+        $SCRIPT_HOME/run.sh start $instanceName
+        sleep 2
+        echo "done"
+}
+
+stop() {
+        echo -n "Stopping CDIC Worker Server: "
+        $SCRIPT_HOME/run.sh stop $instanceName
+        echo "done"
+}
+
+# See how we were called.
+
+if [ "$2" = "" ]; then
+    echo $"Worker name not set. Usage: cdic {start|stop|restart} worker-name"
+    exit
+fi
+
+case "$1" in
+        start)
+                start
+                ;;
+        stop)
+                stop
+                ;;
+        restart)
+                stop
+                start
+                ;;
+        *)
+                echo $"Usage: cdic {start|stop|restart} worker-name"
+                exit
+esac
