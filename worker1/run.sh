@@ -82,7 +82,8 @@ function startServiceProcess {
    cmd="nohup $javaCommandLine >>$serviceLogFile 2>&1 & echo \$! >$pidFile"
    # Don't forget to add -H so the HOME environment variable will be set correctly.
    #sudo -u $serviceUser -H $SHELL -c "$cmd" || return 1
-   su -c "$javaCommandLine >>$serviceLogFile 2>&1 & echo \$! >$pidFile" $serviceUser || return 1
+   #su -c "$javaCommandLine >>$serviceLogFile 2>&1 & echo \$! >$pidFile" $serviceUser || return 1
+   su -c "$javaCommandLine >>$serviceLogFile & echo \$! >$pidFile" $serviceUser || return 1
    sleep 0.1
    pid="$(<$pidFile)"
    if checkProcessIsRunning $pid; then :; else
