@@ -6,7 +6,7 @@
 # A non-SUSE Linux start/stop script for CDIC Worker daemons.
 #
 # Set this to your Java installation
-JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/bin/java
+JAVA_HOME=/usr/bin/java
 
 scriptFile=$(readlink -fn $(type -p $0))                                        # the absolute, dereferenced path of this script file
 scriptDir=$(dirname $scriptFile)                                                    # absolute path of the script directory
@@ -20,8 +20,7 @@ serviceLogFile="logs/$serviceNameLo.out"                            # log file f
 maxShutdownTime=15                                                                     # maximum number of seconds to wait for the daemon to terminate normally
 pidFile="$serviceNameLo.pid"                                        # name of PID file (PID = process ID number)
 javaCommandLineKeyword=$2
-#javaCommand="java"                                                                       # name of the Java launcher without the path
-javaCommand="/usr/lib/jvm/java-7-openjdk-amd64/bin/java"                                 # name of the Java launcher without the path
+javaCommand="java"                                                                       # name of the Java launcher without the path
 jmx="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=25199 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.local.only=false"
 profile="-DENVIRONMENT=postgresql -Dspring.profiles.active=slave,prod"
 instanceOpts="-Xmx8192M -Xms4096M\
@@ -84,7 +83,6 @@ function startServiceProcess {
    # Don't forget to add -H so the HOME environment variable will be set correctly.
    #sudo -u $serviceUser -H $SHELL -c "$cmd" || return 1
    su -c "$javaCommandLine >>$serviceLogFile 2>&1 & echo \$! >$pidFile" $serviceUser || return 1
-   #sudo su - $serviceUser -c "$javaCommandLine >>$serviceLogFile 2>&1 & echo \$! >$pidFile" || return 1
    sleep 0.1
    pid="$(<$pidFile)"
    if checkProcessIsRunning $pid; then :; else
