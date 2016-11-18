@@ -12,7 +12,7 @@ instanceName=$2
 
 start() {
         echo -n "Starting CDIC Worker Server: "
-        $SCRIPT_HOME/run.sh start $instanceName
+        bash -x $SCRIPT_HOME/run.sh start $instanceName
         sleep 2
         echo "done"
 }
