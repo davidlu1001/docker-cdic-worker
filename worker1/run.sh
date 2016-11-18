@@ -6,7 +6,7 @@
 # A non-SUSE Linux start/stop script for CDIC Worker daemons.
 #
 # Set this to your Java installation
-JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
+JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/bin/java
 
 scriptFile=$(readlink -fn $(type -p $0))                                        # the absolute, dereferenced path of this script file
 scriptDir=$(dirname $scriptFile)                                                    # absolute path of the script directory
