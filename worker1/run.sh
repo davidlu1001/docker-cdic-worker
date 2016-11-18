@@ -6,7 +6,7 @@
 # A non-SUSE Linux start/stop script for CDIC Worker daemons.
 #
 # Set this to your Java installation
-JAVA_HOME=/usr/bin/java
+JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 
 scriptFile=$(readlink -fn $(type -p $0))                                        # the absolute, dereferenced path of this script file
 scriptDir=$(dirname $scriptFile)                                                    # absolute path of the script directory
@@ -20,7 +20,8 @@ serviceLogFile="logs/$serviceNameLo.out"                            # log file f
 maxShutdownTime=15                                                                     # maximum number of seconds to wait for the daemon to terminate normally
 pidFile="$serviceNameLo.pid"                                        # name of PID file (PID = process ID number)
 javaCommandLineKeyword=$2
-javaCommand="java"                                                                       # name of the Java launcher without the path
+#javaCommand="java"                                                                       # name of the Java launcher without the path
+javaCommand="/usr/lib/jvm/java-7-openjdk-amd64/bin/java"                                 # name of the Java launcher without the path
 jmx="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=25199 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.local.only=false"
 profile="-DENVIRONMENT=postgresql -Dspring.profiles.active=slave,prod"
 instanceOpts="-Xmx8192M -Xms4096M\
@@ -31,7 +32,7 @@ instanceOpts="-Xmx8192M -Xms4096M\
  -XX:+DoEscapeAnalysis\
  -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps"
 
-javaArgs=" $jmx $profile $instanceOpts -jar ../cdic-boot-0.0.1-SNAPSHOT.jar $javaCommandLineKeyword -DENVIRONMENT=postgresql"  # arguments for Java launcher
+javaArgs=" $jmx $profile $instanceOpts -jar ../cdic-boot-0.0.2-SNAPSHOT.jar $javaCommandLineKeyword -DENVIRONMENT=postgresql"  # arguments for Java launcher
 
  javaCommandLine="$javaCommand $javaArgs"   # command line to start the Java service application
 #javaCommandLineKeyword="worker"                                   # a keyword that occurs on the commandline, used to detect an already running service process and to distinguish it from others
