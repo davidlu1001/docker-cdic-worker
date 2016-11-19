@@ -9,7 +9,7 @@ COPY worker1/run.sh /usr/src/cdic-worker/worker1/
 COPY worker1/cdic /usr/src/cdic-worker/worker1/
 RUN chown cdic:cdic /usr/src/cdic-worker -R
 RUN chmod a+x /usr/src/cdic-worker/worker1/*
-echo "10.100.105.56 cdic-ui.paas.corp.qrious.co.nz" >> /etc/hosts
+RUN echo "10.100.105.56 cdic-ui.paas.corp.qrious.co.nz" >> /etc/hosts
 EXPOSE 25199
 #CMD ["bash", "cdic", "start", "worker1"]
 CMD ["ping", "localhost"]
