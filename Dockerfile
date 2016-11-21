@@ -11,4 +11,5 @@ COPY rabbitmqadmin /usr/src/cdic-worker/worker1/
 RUN chown cdic:cdic /usr/src/cdic-worker -R
 RUN chmod a+x /usr/src/cdic-worker/worker1/*
 EXPOSE 25199
-CMD ["bash", "cdic", "start", "worker1"]
+#CMD ["bash", "-x", "cdic", "start", "worker1"]
+CMD ["ping", "localhost"]
