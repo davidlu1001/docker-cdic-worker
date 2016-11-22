@@ -16,11 +16,7 @@ RUN echo "10.100.104.6:/data/crce/cdic  /data/crce/cdic         nfs     rw,hard,
 RUN echo "10.100.104.9:/data/xdr/cdic  /data/xdr/cdic          nfs     rw,hard,intr,rsize=32768,wsize=32768,nfsvers=3     1  1" >> /etc/fstab
 RUN echo "10.100.104.8:/data/crm/cdic  /data/crm/cdic          nfs     rw,hard,intr,rsize=32768,wsize=32768,nfsvers=3     1  1" >> /etc/fstab
 RUN systemctl enable rpcbind
-RUN systemctl enable nfs-lock
-RUN systemctl enable nfs-idmap
 RUN systemctl start rpcbind
-RUN systemctl start nfs-lock
-RUN systemctl start nfs-idmap
 RUN mount -a
 EXPOSE 25199
 #CMD ["bash", "-x", "cdic", "start", "worker1"]
