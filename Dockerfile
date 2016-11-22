@@ -1,5 +1,6 @@
 FROM centos:7
 RUN yum update && yum install -y sudo vim curl python python-pip telnet net-tools java-1.7.0-openjdk-devel.x86_64 nfs-utils nfs-utils-lib
+echo "nameserver 10.100.110.5" >> /etc/resolv.conf
 WORKDIR /usr/src/cdic-worker/worker1
 RUN mkdir -p /usr/src/cdic-worker/worker1/logs
 RUN groupadd cdic
