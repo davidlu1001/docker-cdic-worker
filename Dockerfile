@@ -12,9 +12,9 @@ COPY worker1/cdic /usr/src/cdic-worker/worker1/
 COPY rabbitmqadmin /usr/src/cdic-worker/worker1/
 RUN chown cdic:cdic /usr/src/cdic-worker -R
 RUN chmod a+x /usr/src/cdic-worker/worker1/*
-RUN "ingest:/data/crce/cdic  /data/crce/cdic         nfs     rw,hard,intr,rsize=32768,wsize=32768,nfsvers=3     1  1" >> /etc/fstab
-RUN "ingest2:/data/xdr/cdic  /data/xdr/cdic          nfs     rw,hard,intr,rsize=32768,wsize=32768,nfsvers=3     1  1" >> /etc/fstab
-RUN "ingest3:/data/crm/cdic  /data/crm/cdic          nfs     rw,hard,intr,rsize=32768,wsize=32768,nfsvers=3     1  1" >> /etc/fstab
+RUN echo "ingest:/data/crce/cdic  /data/crce/cdic         nfs     rw,hard,intr,rsize=32768,wsize=32768,nfsvers=3     1  1" >> /etc/fstab
+RUN echo "ingest2:/data/xdr/cdic  /data/xdr/cdic          nfs     rw,hard,intr,rsize=32768,wsize=32768,nfsvers=3     1  1" >> /etc/fstab
+RUN echo "ingest3:/data/crm/cdic  /data/crm/cdic          nfs     rw,hard,intr,rsize=32768,wsize=32768,nfsvers=3     1  1" >> /etc/fstab
 RUN mount -a
 EXPOSE 25199
 #CMD ["bash", "-x", "cdic", "start", "worker1"]
