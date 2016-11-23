@@ -1,5 +1,5 @@
 FROM dinglu/nfs-client
-RUN yum update -y && yum install -y sudo vim curl python python-pip telnet net-tools java-1.7.0-openjdk-devel.x86_64
+RUN yum update -y && yum install -y sudo vim curl python python-pip telnet net-tools java-1.7.0-openjdk-devel.x86_64 nfs-common nfs-utils nfs-utils-lib libnfsidmap
 WORKDIR /usr/src/cdic-worker/worker1
 RUN mkdir -p /usr/src/cdic-worker/worker1/logs
 RUN groupadd cdic
